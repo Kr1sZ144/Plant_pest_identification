@@ -1,0 +1,144 @@
+#login-box {
+  width: 650px;
+  height: auto;
+  margin: auto; /*上右下左*/
+  margin-top: 8%;
+  text-align: center; /*div框体内字体居中*/
+  background: #00000040;
+  /*border: 1px solid #000000;*/
+}
+
+#login-box .input_box {
+  width: 290px;
+  height: 270px;
+  /* border: 1px solid #000; */
+  margin: 0 auto;
+  /* margin-top: 1%; */
+  padding: 10px 20px;
+}
+#login-box .input_box .int {
+  width: 330px;
+  margin-top: 10px;
+  color: #000;
+  size: 20px;
+  /* border: 1px solid #000; */
+}
+#login-box .input_box .int input {
+  border: 0px solid;
+  margin: 3px;
+  padding: 20px 35px;
+  background: #ffffff50;
+  border-bottom: 2px solid white; /*必须要添加size和solid*/
+  font-size: 18px;
+  /*border: 1px solid #000000;*/
+}
+#login-box .input_box .int input::placeholder {
+  /*修改透明文字中的颜色*/
+  color: #ffffff;
+  /*border: 1px solid #000000;*/
+}
+
+#login-box .input_box .int i {
+  color: white;
+  font-size: 25px;
+  /*border: 1px solid #000000;*/
+}
+#login-box .denglu {
+  /*border: 1px solid #000000;*/
+  margin-left: 35px;
+  margin-top: 20px;
+}
+#login-box .denglu button {
+  /*margin: 10%;*/
+  width: 290px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  border: 0px;
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+  border-radius: 15px; /*将框体变成圆角*/
+}
+#login-box .denglu a {
+  font-size: 25px;
+  font-weight: 600;
+  color: #00000060;
+  background-image: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
+  text-decoration: none;
+}
+/*将框体变成圆角*/
+/*
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+*/
+
+.main {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+}
+.tab {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style-type: none;
+}
+
+.tab li {
+  float: left;
+}
+
+.tab li a {
+  text-decoration: none;
+  color: #000;
+  background: #ddd;
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+}
+
+#content1,
+#content2 {
+  display: none;
+  width: 240px;
+  height: 100px;
+  border: 1px solid #ddd;
+  position: absolute;
+  top: 40px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#content1:target,
+#content2:target {
+  display: block;
+}
+#content1:target ~ .tab li:nth-child(1) a {
+  background: skyblue;
+  color: #fff;
+}
+#content2:target ~ .tab li:nth-child(2) a {
+  background: skyblue;
+  color: #fff;
+}
+#content1,
+#content2 {
+  display: none;
+}
+#content1:target,
+#content2:target {
+  display: block;
+}
+#content1:target ~ .tab li:nth-child(1) a {
+  background: skyblue;
+  color: #fff;
+}
+#content2:target ~ .tab li:nth-child(2) a {
+  background: skyblue;
+  color: #fff;
+}

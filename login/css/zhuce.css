@@ -1,0 +1,78 @@
+#login-box {
+  width: 650px;
+  height: auto;
+  margin: auto; /*上右下左*/
+  margin-top: 8%;
+  text-align: center; /*div框体内字体居中*/
+  background: #00000040;
+  /*border: 1px solid #000000;*/
+}
+
+#login-box .input_box {
+  width: 290px;
+  height: 270px;
+  /* border: 1px solid #000; */
+  margin: 0 auto;
+  /* margin-top: 1%; */
+  padding: 10px 20px;
+}
+#login-box .input_box .int {
+  width: 330px;
+  margin-top: 10px;
+  color: #000;
+  size: 20px;
+  /* border: 1px solid #000; */
+}
+#login-box .input_box .int input {
+  border: 0px solid;
+  margin: 3px;
+  padding: 20px 35px;
+  background: #ffffff50;
+  border-bottom: 2px solid white; /*必须要添加size和solid*/
+  font-size: 18px;
+  /*border: 1px solid #000000;*/
+}
+#login-box .input_box .int input::placeholder {
+  /*修改透明文字中的颜色*/
+  color: #ffffff;
+  /*border: 1px solid #000000;*/
+}
+
+#login-box .input_box .int i {
+  color: white;
+  font-size: 25px;
+  /*border: 1px solid #000000;*/
+}
+#login-box .denglu {
+  /*border: 1px solid #000000;*/
+  margin-left: 35px;
+  margin-top: 20px;
+}
+#login-box .denglu button {
+  /*margin: 10%;*/
+ font-size: 19px;
+            border: none;
+            width: 149px;
+            background: #8000800c;
+            border-radius: 29px;
+            height: 49px;
+            color: aliceblue;
+            cursor: pointer;
+            transition: -1.3s;
+
+  /* width: 290px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  border: 0px;
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+  border-radius: 15px; 将框体变成圆角 */
+}
+#login-box .denglu a {
+  font-size: 25px;
+  font-weight: 600;
+  color: #00000060;
+  background-image: linear-gradient(to top, #9795f0 0%, #fbc8d4 100%);
+  text-decoration: none;
+}

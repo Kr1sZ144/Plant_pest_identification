@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+  <title>植物病虫害识别系统</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">植物病虫害识别系统</h1>
+      <p class="lead">Picture recognition system</p>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <!-- <form action="images.php" method="post" enctype="multipart/form-data"> -->
+        <input type="file" class="btn btn-primary" id='file' name="images" style="display:none;"></input>
+        <button type="button" class="btn btn-lg btn-primary" id='upload'>上传</button>
+        <!-- </form> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <h5>图片预览</h5>
+
+        <img src="" class="img-fluid" style="width:500px;height:500px" id="img">
+
+
+      </div>
+
+      <div class="col-sm">
+        <button type="button" class="btn btn-primary" id='scanf'>识别</button>
+        <br>
+        <br>
+        <h5>识别结果 :&nbsp&nbsp&nbsp<span id="jieguo"></span> </h5>
+        <br>
+        <h6>可能性百分比1最大0最小</h6>
+        <br>
+        <div class="shadow p-3 mb-5 bg-white rounded" id='num1'>健康</div>
+        <div class="shadow p-3 mb-5 bg-white rounded" id='num2'>葡萄褐斑病</div>
+        <div class="shadow p-3 mb-5 bg-white rounded" id='num3'>葡萄轮斑病</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+  <!-- anonymous 跨域 -->
+  <!-- integrity 防止 CDN 篡改 javascript 用的 -->
+</body>
+<script>
+  $(function () {
+    if ($('#img').attr('src')) {
+      //不为空
+
+    } else {
+      //为空
+      $('#img').hide();
+    }
+    $('#upload').click(function () {
+      $('#file').click();
+
+    })
+
+    $("#file").change(function () {
+      //预览部分
+      var file = this.files[0] ? this.files[0] : null;
+
+      if (null == file) {
+        return false;
+      }
+      var file_reader = new FileReader();
+
+      file_reader.onload = (function () {
+        var image_url = this.result;    // 这是图片的路径
+        $("#img").attr('src', image_url);
+      });
+      file_reader.readAsDataURL(file);
+      $('#img').show();
+      //ajax上传部分
+      var formdata = new FormData(document.getElementById('file')[0]);
+      formdata.append('images', this.files[0]);
+      // console.log(formdata.get('images'));
+      $.ajax({
+        url: 'images.php', //路径
+        data: formdata,
+        type: "POST", //post请求
+        async: false,
+        cache: false,
+        contentType: false, //内容类型
+        processData: false, //不希望转换获取的信息
+        success: function (data) {
+          console.log(JSON.stringify(data));
+          name = data;
+          // 　　　　$('#updata_img').src
+        },
+        error: function (data) {
+          console.log(data.status);
+        }
+      })
+    })
+    $('#scanf').click(function () {
+      if ($('#file').val() == '') {
+        alert('请先上传图片');
+      } else {
+        $.ajax({
+          url: 'postAPI.php',
+          data: { 'name': name },
+          type: "POST",
+          success: function (data) {
+            var jsondata = JSON.parse(data);
+            if (jsondata.error_code == "APIG.0101") {
+              alert("请到华为云打开图像分类服务");
+            } else {
+              console.log(jsondata);
+              $('#jieguo').html(jsondata.predicted_label);
+              $('#num1').html(jsondata.scores[0]);
+              $('#num2').html(jsondata.scores[1]);
+              $('#num3').html(jsondata.scores[2]);
+
+            }
+          },
+          error: function (data) {
+            console.log(data.status);
+          }
+        })
+      }
+
+    })
+  })
+</script>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>在线注册</title>
+    <link rel="stylesheet" href="./css/zhuce.css">
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.css">
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+</head>
+
+<body>
+    <div id="login-box">
+        <h1 style="color: #ffffff;padding-top: 40px ;">注册用户信息</h1>
+        <form id="frm">
+            <div class="input_box">
+                <!-- 用户名 ↓ ↓ ↓ -->
+                <div class="int">
+                    <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                    <input type="text" name="userName" />
+                </div>
+
+                <!-- 密码 ↓ ↓ ↓ -->
+                <div class="int">
+                    <i class="fa fa-key" aria-hidden="true"></i>
+                    <input type="password" name="pwd" />
+                </div>
+
+                <div class="denglu">
+                    <button type="button" id="btn">提交注册</button>
+                </div>
+
+                <!-- 登录按钮 -->
+
+
+            </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    $("#btn").click(function () {
+        $.post("2.php", $("#frm").serialize(), function (res) {//表单序列化
+            if (res == 1) {
+                alert("ok!你已经成功~~~");
+                window.location.href = "login.html";
+            } else {
+                alert("注册失败！")
+            }
+        })
+    })
+</script>
+
+</html>
